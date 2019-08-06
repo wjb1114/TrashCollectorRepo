@@ -20,5 +20,10 @@ namespace Collectr.Models
         public string City { get; set; }
         public string State { get; set; }
         public int ZipCode { get; set; }
+        public DayOfWeek WeeklyPickupDay { get; set; }
+        public int Balance { get; set; }
+        public DateTime ExtraPickupDay { get; set; }
+        public DateTime NoPickupStart { get; set; }
+        public DateTime NoPickupEnd { get; set; }
     }
 }
