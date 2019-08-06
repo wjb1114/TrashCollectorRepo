@@ -29,5 +29,8 @@ namespace Collectr.Models
         {
             return new ApplicationDbContext();
         }
+
+        DbSet<Employee> Employees { get; set; }
+        DbSet<Customer> Customers { get; set; }
     }
 }

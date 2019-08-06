@@ -173,7 +173,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908061929254_InitialCreate.cs" />
+    <Compile Include="Migrations\201908061929254_InitialCreate.Designer.cs">
+      <DependentUpon>201908061929254_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908061944235_InitialMigrationCollectr.cs" />
+    <Compile Include="Migrations\201908061944235_InitialMigrationCollectr.Designer.cs">
+      <DependentUpon>201908061944235_InitialMigrationCollectr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908061947391_CollectrCustomerInitial.cs" />
+    <Compile Include="Migrations\201908061947391_CollectrCustomerInitial.Designer.cs">
+      <DependentUpon>201908061947391_CollectrCustomerInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908061948374_CollectrCustomerUpdate.cs" />
+    <Compile Include="Migrations\201908061948374_CollectrCustomerUpdate.Designer.cs">
+      <DependentUpon>201908061948374_CollectrCustomerUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -251,6 +270,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908061929254_InitialCreate.resx">
+      <DependentUpon>201908061929254_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908061944235_InitialMigrationCollectr.resx">
+      <DependentUpon>201908061944235_InitialMigrationCollectr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908061947391_CollectrCustomerInitial.resx">
+      <DependentUpon>201908061947391_CollectrCustomerInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908061948374_CollectrCustomerUpdate.resx">
+      <DependentUpon>201908061948374_CollectrCustomerUpdate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
