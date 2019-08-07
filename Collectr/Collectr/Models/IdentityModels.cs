@@ -32,5 +32,11 @@ namespace Collectr.Models
 
         DbSet<Employee> Employees { get; set; }
         DbSet<Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<Collectr.Models.Employee> Employees { get; set; }
+
+        public System.Data.Entity.DbSet<Collectr.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<Collectr.Models.Customer> Customers { get; set; }
     }
 }
