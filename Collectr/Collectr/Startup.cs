@@ -37,7 +37,7 @@ namespace Collectr
                 //Here we create a Admin super user who will maintain the website                  
 
                 var user = new ApplicationUser();
-                user.UserName = "wjb1114";
+                user.UserName = "kbd1114@gmail.com";
                 user.Email = "kbd1114@gmail.com";
 
                 string userPWD = "TestPassword1!";
