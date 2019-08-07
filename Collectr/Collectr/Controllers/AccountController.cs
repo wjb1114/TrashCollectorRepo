@@ -203,6 +203,7 @@ namespace Collectr.Controllers
                     {
                         Employee employee = new Employee();
                         employee.ApplicationId = user.Id;
+                        employee.EmailAddress = user.Email;
                         context.Employees.Add(employee);
                         context.SaveChanges();
                         return RedirectToAction("Index", "Employee", new { userId = user.Id });

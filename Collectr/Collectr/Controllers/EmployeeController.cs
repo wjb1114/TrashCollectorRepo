@@ -1,6 +1,7 @@
 ﻿using Collectr.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +19,7 @@ namespace Collectr.Controllers
         // GET: Employee
         public ActionResult Index(string userId)
         {
-            var user = context.Employees.Where(u => u.ApplicationId == userId).Single();
+            var user = context.Employees.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
             return View(user);
         }
 
@@ -54,7 +55,7 @@ namespace Collectr.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(string userId)
         {
-            var employee = context.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
+            var employee = context.Employees.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
             return View(employee);
         }
 
@@ -65,9 +66,12 @@ namespace Collectr.Controllers
             try
             {
                 Employee foundEmployee = context.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+                ApplicationUser foundUser = context.Users.Where(u => u.Id == foundEmployee.ApplicationId).Single();
                 foundEmployee.FirstName = employee.FirstName;
                 foundEmployee.LastName = employee.LastName;
                 foundEmployee.ZipCode = employee.ZipCode;
+                foundUser.Email = employee.EmailAddress;
+                foundEmployee.EmailAddress = employee.EmailAddress;
                 context.SaveChanges();
 
                 return RedirectToAction("Index", new { userId = foundEmployee.ApplicationId });

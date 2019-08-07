@@ -19,5 +19,8 @@ namespace Collectr.Models
         public int ZipCode { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [EmailAddress]
+        public string EmailAddress { get; set; }
     }
 }
