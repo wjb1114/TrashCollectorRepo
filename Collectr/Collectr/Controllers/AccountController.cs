@@ -181,16 +181,41 @@ namespace Collectr.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771   
                     // Send an email with this link   
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);   
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);   
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");   
-                    //Assign Role to user Here      
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
-                    //Ends Here    
-                    return RedirectToAction("Index", "Home");
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");    
+
+                    user = await UserManager.FindAsync(model.Email, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Customer"))
+                    {
+                        Customer customer = new Customer();
+                        customer.ApplicationId = user.Id;
+                        context.Customers.Add(customer);
+                        context.SaveChanges();
+                        return RedirectToAction("Index", "Customer", customer);
+                    }
+                    else if (roles.Contains("Employee"))
+                    {
+                        Employee employee = new Employee();
+                        employee.ApplicationId = user.Id;
+                        context.Employees.Add(employee);
+                        context.SaveChanges();
+                        return RedirectToAction("Index", "Employee", new { userId = user.Id });
+                    }
+                    else if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin", new { userId = user.Id });
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
+                    
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                           .ToList(), "Name", "Name");

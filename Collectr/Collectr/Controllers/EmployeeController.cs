@@ -9,11 +9,16 @@ namespace Collectr.Controllers
 {
     public class EmployeeController : Controller
     {
-        ApplicationDbContext context = new ApplicationDbContext();
+        ApplicationDbContext context;
+
+        public EmployeeController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Employee
         public ActionResult Index(string userId)
         {
-            var user = context.Users.Where(u => u.Id == userId).Single();
+            var user = context.Employees.Where(u => u.ApplicationId == userId).Single();
             return View(user);
         }
 
@@ -47,20 +52,25 @@ namespace Collectr.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string userId)
         {
-            return View();
+            var employee = context.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
+            return View(employee);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
             try
             {
-                // TODO: Add update logic here
+                Employee foundEmployee = context.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+                foundEmployee.FirstName = employee.FirstName;
+                foundEmployee.LastName = employee.LastName;
+                foundEmployee.ZipCode = employee.ZipCode;
+                context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { userId = foundEmployee.ApplicationId });
             }
             catch
             {

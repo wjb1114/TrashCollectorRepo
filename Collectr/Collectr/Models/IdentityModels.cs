@@ -30,13 +30,10 @@ namespace Collectr.Models
             return new ApplicationDbContext();
         }
 
-        DbSet<Employee> Employees { get; set; }
-        DbSet<Customer> Customers { get; set; }
-
-        //public System.Data.Entity.DbSet<Collectr.Models.Employee> Employees { get; set; }
+        public System.Data.Entity.DbSet<Collectr.Models.Employee> Employees { get; set; }
 
         //public System.Data.Entity.DbSet<Collectr.Models.ApplicationUser> ApplicationUsers { get; set; }
 
-        //public System.Data.Entity.DbSet<Collectr.Models.Customer> Customers { get; set; }
+        public System.Data.Entity.DbSet<Collectr.Models.Customer> Customers { get; set; }
     }
 }
