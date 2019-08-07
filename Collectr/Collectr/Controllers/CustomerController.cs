@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Collectr.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,14 @@ using System.Web.Mvc;
 namespace Collectr.Controllers
 {
     public class CustomerController : Controller
+        
     {
+        ApplicationDbContext context = new ApplicationDbContext();
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(string userId)
         {
-            return View();
+            var user = context.Users.Where(u => u.Id == userId).Single();
+            return View(user);
         }
 
         // GET: Customer/Details/5

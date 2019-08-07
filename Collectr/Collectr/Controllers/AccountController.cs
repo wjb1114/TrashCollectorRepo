@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Collectr.Models;
+using System.Web.Security;
 
 namespace Collectr.Controllers
 {
@@ -82,7 +83,27 @@ namespace Collectr.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    string currentRole = "";
+                    if (roles.Contains("Customer"))
+                    {
+                        currentRole = "Customer";
+                    }
+                    else if (roles.Contains("Employee"))
+                    {
+                        currentRole = "Employee";
+                    }
+                    else if (roles.Contains("Admin"))
+                    {
+                        currentRole = "Admin";
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                    }
+                    return RedirectToAction("Index", currentRole, new { userId = user.Id });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -400,6 +421,7 @@ namespace Collectr.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 
