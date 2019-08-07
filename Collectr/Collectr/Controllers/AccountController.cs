@@ -195,6 +195,7 @@ namespace Collectr.Controllers
                     {
                         Customer customer = new Customer();
                         customer.ApplicationId = user.Id;
+                        customer.EmailAddress = user.Email;
                         context.Customers.Add(customer);
                         context.SaveChanges();
                         return RedirectToAction("Index", "Customer", customer);
