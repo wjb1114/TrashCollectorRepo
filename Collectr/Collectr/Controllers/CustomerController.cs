@@ -1,6 +1,7 @@
 ﻿using Collectr.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,11 +11,16 @@ namespace Collectr.Controllers
     public class CustomerController : Controller
         
     {
-        ApplicationDbContext context = new ApplicationDbContext();
+        ApplicationDbContext context;
+
+        public CustomerController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Customer
         public ActionResult Index(string userId)
         {
-            var user = context.Users.Where(u => u.Id == userId).Single();
+            var user = context.Customers.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
             return View(user);
         }
 
@@ -47,20 +53,35 @@ namespace Collectr.Controllers
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string userId)
         {
-            return View();
+            var employee = context.Customers.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
+            return View(employee);
         }
 
-        // POST: Customer/Edit/5
+        // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Customer customer)
         {
             try
             {
-                // TODO: Add update logic here
+                Customer foundCustomer = context.Customers.Where(c => c.CustomerId == customer.CustomerId).Single();
+                ApplicationUser foundUser = context.Users.Where(u => u.Id == foundCustomer.ApplicationId).Single();
+                foundCustomer.FirstName = customer.FirstName;
+                foundCustomer.LastName = customer.LastName;
+                foundUser.Email = customer.EmailAddress;
+                foundCustomer.EmailAddress = customer.EmailAddress;
+                foundCustomer.StreetAddress = customer.StreetAddress;
+                foundCustomer.City = customer.City;
+                foundCustomer.State = customer.State;
+                foundCustomer.ZipCode = customer.ZipCode;
+                foundCustomer.WeeklyPickupDay = customer.WeeklyPickupDay;
+                foundCustomer.ExtraPickupDay = customer.ExtraPickupDay;
+                foundCustomer.NoPickupStart = customer.NoPickupStart;
+                foundCustomer.NoPickupEnd = customer.NoPickupEnd;
+                context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { userId = foundCustomer.ApplicationId });
             }
             catch
             {

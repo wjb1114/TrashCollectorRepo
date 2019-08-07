@@ -198,7 +198,7 @@ namespace Collectr.Controllers
                         customer.EmailAddress = user.Email;
                         context.Customers.Add(customer);
                         context.SaveChanges();
-                        return RedirectToAction("Index", "Customer", customer);
+                        return RedirectToAction("Index", "Customer", new { userId = user.Id });
                     }
                     else if (roles.Contains("Employee"))
                     {
