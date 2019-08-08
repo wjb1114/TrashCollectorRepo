@@ -216,6 +216,22 @@
     <Compile Include="Migrations\201908072045160_CollectrUpdateFive.Designer.cs">
       <DependentUpon>201908072045160_CollectrUpdateFive.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908081503104_CollectrUpdateSix.cs" />
+    <Compile Include="Migrations\201908081503104_CollectrUpdateSix.Designer.cs">
+      <DependentUpon>201908081503104_CollectrUpdateSix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908081510163_CollectrUpdateSeven.cs" />
+    <Compile Include="Migrations\201908081510163_CollectrUpdateSeven.Designer.cs">
+      <DependentUpon>201908081510163_CollectrUpdateSeven.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908081517469_CollectrUpdateEight.cs" />
+    <Compile Include="Migrations\201908081517469_CollectrUpdateEight.Designer.cs">
+      <DependentUpon>201908081517469_CollectrUpdateEight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908081531335_CollectrUpdateNine.cs" />
+    <Compile Include="Migrations\201908081531335_CollectrUpdateNine.Designer.cs">
+      <DependentUpon>201908081531335_CollectrUpdateNine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -333,6 +349,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908072045160_CollectrUpdateFive.resx">
       <DependentUpon>201908072045160_CollectrUpdateFive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908081503104_CollectrUpdateSix.resx">
+      <DependentUpon>201908081503104_CollectrUpdateSix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908081510163_CollectrUpdateSeven.resx">
+      <DependentUpon>201908081510163_CollectrUpdateSeven.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908081517469_CollectrUpdateEight.resx">
+      <DependentUpon>201908081517469_CollectrUpdateEight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908081531335_CollectrUpdateNine.resx">
+      <DependentUpon>201908081531335_CollectrUpdateNine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -25,11 +25,13 @@ namespace Collectr.Models
         public int ZipCode { get; set; }
         public DayOfWeek WeeklyPickupDay { get; set; }
         public int Balance { get; set; }
-        [Column(TypeName ="datetime2")]
-        public DateTime ExtraPickupDay { get; set; }
-        [Column(TypeName = "datetime2")]
-        public DateTime NoPickupStart { get; set; }
-        [Column(TypeName = "datetime2")]
-        public DateTime NoPickupEnd { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? ExtraPickupDay { get; set; } = null;
+        [Column(TypeName = "date")]
+        public DateTime? NoPickupStart { get; set; } = null;
+        [Column(TypeName = "date")]
+        public DateTime? NoPickupEnd { get; set; } = null;
+        public DateTime? LastPickedUp { get; set; }
+        public bool LatestPickedUp { get; set; } = false;
     }
 }
