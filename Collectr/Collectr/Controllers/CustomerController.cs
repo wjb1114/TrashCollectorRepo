@@ -18,9 +18,9 @@ namespace Collectr.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Customer
-        public ActionResult Index(string userId)
+        public ActionResult Index(string name)
         {
-            var user = context.Customers.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
+            var user = context.Customers.Where(u => u.EmailAddress == name).Include(m => m.ApplicationUser).Single();
             return View(user);
         }
 

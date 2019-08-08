@@ -84,10 +84,58 @@ namespace Collectr.Controllers
             }
         }
 
-        public ActionResult Collect(string CustomerID, string userId)
+        public ActionResult Collect(string customerId)
         {
-            var foundEmployee = context.Employees.Where(e => e.ApplicationId == userId).Single();
-            return RedirectToAction("Index", new { userId = foundEmployee.ApplicationId });
+            var foundEmployee = context.Employees.Where(e => e.EmailAddress == User.Identity.Name).Single();
+            var foundCustomer = context.Customers.Where(c => c.ApplicationId == customerId).Single();
+
+            foundCustomer.LatestPickedUp = true;
+            foundCustomer.Balance += 40;
+            foundCustomer.LastPickedUp = DateTime.Today;
+            var nextPickupDay = DateTime.Today.AddDays(1);
+            if (foundCustomer.ExtraPickupDay != null)
+            {
+                while (nextPickupDay.DayOfWeek != foundCustomer.WeeklyPickupDay && nextPickupDay != foundCustomer.ExtraPickupDay)
+                {
+                    nextPickupDay = nextPickupDay.AddDays(1);
+                }
+            }
+            else
+            {
+                while (nextPickupDay.DayOfWeek != foundCustomer.WeeklyPickupDay)
+                {
+                    nextPickupDay = nextPickupDay.AddDays(1);
+                }
+            }
+
+            if (foundCustomer.NoPickupStart != null && foundCustomer.NoPickupEnd != null && foundCustomer.NoPickupStart <= foundCustomer.NoPickupEnd)
+            {
+                if (nextPickupDay >= foundCustomer.NoPickupStart && nextPickupDay <= foundCustomer.NoPickupEnd)
+                {
+                    nextPickupDay = foundCustomer.NoPickupEnd.Value.AddDays(1);
+
+                    if (foundCustomer.ExtraPickupDay != null)
+                    {
+                        while (nextPickupDay.DayOfWeek != foundCustomer.WeeklyPickupDay && nextPickupDay != foundCustomer.ExtraPickupDay)
+                        {
+                            nextPickupDay = nextPickupDay.AddDays(1);
+                        }
+                    }
+                    else
+                    {
+                        while (nextPickupDay.DayOfWeek != foundCustomer.WeeklyPickupDay)
+                        {
+                            nextPickupDay = nextPickupDay.AddDays(1);
+                        }
+                    }
+                }
+            }
+            
+            foundCustomer.NextPickup = nextPickupDay;
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index", new { name = foundEmployee.EmailAddress });
         }
     }
 }
