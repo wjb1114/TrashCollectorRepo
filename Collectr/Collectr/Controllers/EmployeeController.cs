@@ -17,23 +17,25 @@ namespace Collectr.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Employee
-        public ActionResult Index(string userId)
+        public ActionResult Index(string name)
         {
-            var user = context.Employees.Where(u => u.ApplicationId == userId).Include(m => m.ApplicationUser).Single();
-            return View(user);
+            var user = context.Employees.Where(u => u.EmailAddress == name).Include(m => m.ApplicationUser).Single();
+            var customers = context.Customers.Where(c => c.ZipCode == user.ZipCode).Where(c => c.WeeklyPickupDay == DateTime.Today.DayOfWeek).ToList();
+            return View(customers);
         }
 
 
         // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var foundEmployee = context.Employees.Where(c => c.ApplicationId == id).Single();
+            return View(foundEmployee);
         }
 
-        // GET: Employee/Create
-        public ActionResult Create()
+        public ActionResult CustomerDetails(string customerId)
         {
-            return View();
+            var foundCustomer = context.Customers.Where(c => c.ApplicationId == customerId).Single();
+            return View(foundCustomer);
         }
 
         // POST: Employee/Create
@@ -82,26 +84,10 @@ namespace Collectr.Controllers
             }
         }
 
-        // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Collect(string CustomerID, string userId)
         {
-            return View();
-        }
-
-        // POST: Employee/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var foundEmployee = context.Employees.Where(e => e.ApplicationId == userId).Single();
+            return RedirectToAction("Index", new { userId = foundEmployee.ApplicationId });
         }
     }
 }

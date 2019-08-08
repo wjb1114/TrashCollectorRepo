@@ -1,4 +1,4 @@
-﻿@model Collectr.Models.Employee
+﻿@model List<Collectr.Models.Customer>
 
 @{
     ViewBag.Title = "Index";
@@ -7,44 +7,26 @@
 <h2>Index</h2>
 
 <div>
-    <h4>Employee</h4>
+    <h4>Today's pickups</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </dt>
+    <table>
+        <tr>
+            <td>Customer:</td>
+            <td>Address:</td>
+            <td>Next Pickup Date:</td>
+            <td>View Details</td>
+        </tr>
+        @foreach (Collectr.Models.Customer customer in Model)
+        {
+            string fullName = customer.FirstName + " " + customer.LastName;
+            string fullAddress = customer.StreetAddress + " " + customer.City + ", " + customer.State + " " + customer.ZipCode;
 
-        <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-    </dl>
+            <tr>
+                <td>@fullName</td>
+                <td>@fullAddress</td>
+                <td>@customer.NextPickup</td>
+                <td>@Html.ActionLink("View Details", "CustomerDetails", new { customerId = customer.ApplicationId })</td>
+            </tr>
+        }
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { userId = Model.ApplicationId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

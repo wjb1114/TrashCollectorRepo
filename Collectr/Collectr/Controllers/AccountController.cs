@@ -103,7 +103,7 @@ namespace Collectr.Controllers
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                     }
-                    return RedirectToAction("Index", currentRole, new { userId = user.Id });
+                    return RedirectToAction("Index", currentRole, new { name = user.Email });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -198,7 +198,7 @@ namespace Collectr.Controllers
                         customer.EmailAddress = user.Email;
                         context.Customers.Add(customer);
                         context.SaveChanges();
-                        return RedirectToAction("Index", "Customer", new { userId = user.Id });
+                        return RedirectToAction("Edit", "Customer", new { userId = user.Id });
                     }
                     else if (roles.Contains("Employee"))
                     {
@@ -207,7 +207,7 @@ namespace Collectr.Controllers
                         employee.EmailAddress = user.Email;
                         context.Employees.Add(employee);
                         context.SaveChanges();
-                        return RedirectToAction("Index", "Employee", new { userId = user.Id });
+                        return RedirectToAction("Edit", "Employee", new { userId = user.Id });
                     }
                     else if (roles.Contains("Admin"))
                     {

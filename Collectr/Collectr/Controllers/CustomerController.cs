@@ -80,7 +80,8 @@ namespace Collectr.Controllers
                 foundCustomer.NoPickupStart = customer.NoPickupStart;
                 foundCustomer.NoPickupEnd = customer.NoPickupEnd;
 
-                DateTime nextPickup = DateTime.Now.AddDays(1);
+
+                DateTime nextPickup = DateTime.Today;
                 while (nextPickup.DayOfWeek != foundCustomer.WeeklyPickupDay)
                 {
                     nextPickup = nextPickup.AddDays(1);
