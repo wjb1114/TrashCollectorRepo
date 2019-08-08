@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201908081531335_CollectrUpdateNine.Designer.cs">
       <DependentUpon>201908081531335_CollectrUpdateNine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908081551085_CollectrUpdateTen.cs" />
+    <Compile Include="Migrations\201908081551085_CollectrUpdateTen.Designer.cs">
+      <DependentUpon>201908081551085_CollectrUpdateTen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -361,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908081531335_CollectrUpdateNine.resx">
       <DependentUpon>201908081531335_CollectrUpdateNine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908081551085_CollectrUpdateTen.resx">
+      <DependentUpon>201908081551085_CollectrUpdateTen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

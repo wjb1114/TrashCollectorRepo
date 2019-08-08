@@ -32,6 +32,7 @@ namespace Collectr.Models
         [Column(TypeName = "date")]
         public DateTime? NoPickupEnd { get; set; } = null;
         public DateTime? LastPickedUp { get; set; }
+        public DateTime? NextPickup { get; set; }
         public bool LatestPickedUp { get; set; } = false;
     }
 }

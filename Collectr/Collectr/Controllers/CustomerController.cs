@@ -79,6 +79,14 @@ namespace Collectr.Controllers
                 foundCustomer.ExtraPickupDay = customer.ExtraPickupDay;
                 foundCustomer.NoPickupStart = customer.NoPickupStart;
                 foundCustomer.NoPickupEnd = customer.NoPickupEnd;
+
+                DateTime nextPickup = DateTime.Now.AddDays(1);
+                while (nextPickup.DayOfWeek != foundCustomer.WeeklyPickupDay)
+                {
+                    nextPickup = nextPickup.AddDays(1);
+                }
+
+                foundCustomer.NextPickup = nextPickup;
                 context.SaveChanges();
 
                 return RedirectToAction("Index", new { userId = foundCustomer.ApplicationId });
