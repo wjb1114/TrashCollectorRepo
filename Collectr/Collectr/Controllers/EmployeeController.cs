@@ -20,10 +20,32 @@ namespace Collectr.Controllers
         public ActionResult Index(string name)
         {
             var user = context.Employees.Where(u => u.EmailAddress == name).Include(m => m.ApplicationUser).Single();
-            var customers = context.Customers.Where(c => c.ZipCode == user.ZipCode).Where(c => c.WeeklyPickupDay == DateTime.Today.DayOfWeek).ToList();
-            return View(customers);
+            List<Customer> customers = context.Customers.Where(c => c.ZipCode == user.ZipCode).ToList();
+            List<Customer> customerList = new List<Customer>();
+            foreach (Customer cust in customers)
+            {
+                if (cust.NextPickup.Value.Date == DateTime.Today.Date)
+                {
+                    customerList.Add(cust);
+                }
+            }
+            return View(customerList);
         }
 
+        public ActionResult ListByDay(DayOfWeek dayOfTheWeek, string name)
+        {
+            var user = context.Employees.Where(e => e.EmailAddress == name).Include(m => m.ApplicationUser).Single();
+            List<Customer> customers = context.Customers.Where(c => c.ZipCode == user.ZipCode).ToList();
+            List<Customer> customerList = new List<Customer>();
+            foreach (Customer cust in customers)
+            {
+                if (cust.NextPickup.Value.DayOfWeek == dayOfTheWeek)
+                {
+                    customerList.Add(cust);
+                }
+            }
+            return View("Index", customerList);
+        }
 
         // GET: Employee/Details/5
         public ActionResult Details(string id)
