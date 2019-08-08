@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "CustomerDetails";
 }
-
+<script type="text/javascript" src="~\APIKeys\config.js"></script>
 <h2>Customer Details</h2>
 
 <div>
@@ -53,4 +53,21 @@
                 </dd>
             }
     </dl>
+</div>
+
+@{ 
+    string query = "";
+    query += Model.StreetAddress.Replace(' ', '+');
+    query += ",";
+    query += Model.City;
+    query += ",";
+    query += Model.State;
+    query += ",+USA";
+
+    string source = "https://www.google.com/maps/embed/v1/search?q=" + query + "&key=" ;
+}
+
+<div>
+    <iframe width="600" height="450" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/search?q=7223+West+Lakefield+Drive,+Milwaukee,+WI,+USA&key=l" allowfullscreen></iframe>
 </div>
