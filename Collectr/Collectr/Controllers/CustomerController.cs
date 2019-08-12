@@ -90,7 +90,7 @@ namespace Collectr.Controllers
                 foundCustomer.NextPickup = nextPickup;
                 context.SaveChanges();
 
-                return RedirectToAction("Index", new { userId = foundCustomer.ApplicationId });
+                return RedirectToAction("Index", new { name = User.Identity.Name });
             }
             catch
             {

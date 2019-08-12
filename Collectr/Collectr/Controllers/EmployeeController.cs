@@ -98,7 +98,7 @@ namespace Collectr.Controllers
                 foundEmployee.EmailAddress = employee.EmailAddress;
                 context.SaveChanges();
 
-                return RedirectToAction("Index", new { userId = foundEmployee.ApplicationId });
+                return RedirectToAction("Index", new { name = foundEmployee.EmailAddress });
             }
             catch
             {
@@ -154,6 +154,8 @@ namespace Collectr.Controllers
             }
             
             foundCustomer.NextPickup = nextPickupDay;
+
+            foundCustomer.LatestPickedUp = false;
 
             context.SaveChanges();
 

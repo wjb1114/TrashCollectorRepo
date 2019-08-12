@@ -39,7 +39,7 @@
         <dt>
             Collection status
         </dt>
-            @if (Model.LatestPickedUp == false)
+            @if (Model.LatestPickedUp == false && Model.NextPickup.Value.Date == DateTime.Today.Date)
             {
                 <dd>
                     Not Collected <br /><br />

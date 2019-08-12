@@ -26,3 +26,17 @@ textarea {
 .options-table td {
     padding: 10px;
 }
+
+#pickups {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#pickups td {
+    border: 1px;
+    padding: 10px;
+}
+
+#pickups tr:nth-child(even) {
+    background-color: #ddd;
+}
