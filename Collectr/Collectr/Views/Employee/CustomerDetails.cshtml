@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "CustomerDetails";
 }
-<script type="text/javascript" src="~\APIKeys\config.js"></script>
+<script type="text/javascript" src="\APIKeys\config.js"></script>
 <h2>Customer Details</h2>
 
 <div>
@@ -64,10 +64,24 @@
     query += Model.State;
     query += ",+USA";
 
-    string source = "https://www.google.com/maps/embed/v1/search?q=" + query + "&key=" ;
+    string source = "https://www.google.com/maps/embed/v1/search?q=" + query;
 }
 
-<div>
-    <iframe width="600" height="450" frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/search?q=7223+West+Lakefield+Drive,+Milwaukee,+WI,+USA&key=l" allowfullscreen></iframe>
+
+
+<div id="iframe-div">
+    
 </div>
+
+<script>
+    var key = config.EMBED_KEY;
+    var sourceString = "@source";
+    var iframeDiv = document.getElementById("iframe-div");
+    var map = document.createElement("iframe");
+    map.setAttribute("width", "600");
+    map.setAttribute("height", "450");
+    map.setAttribute("frameborder", "0");
+    map.setAttribute("style", "border:0");
+    map.setAttribute("src", sourceString + "&key=" + key);
+    iframeDiv.appendChild(map);
+</script>
