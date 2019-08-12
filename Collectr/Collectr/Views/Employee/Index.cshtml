@@ -9,6 +9,8 @@
 <div>
     <h4>Today's pickups</h4>
     <hr />
+    @if (Model.Count > 0)
+    {
     <table>
         <tr>
             <td>Customer:</td>
@@ -29,17 +31,34 @@
             </tr>
         }
     </table>
+    }
 
-    <table>
-        <tr>
-            <td>@Html.ActionLink("View list for Today", "Index", new { name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Sundays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Sunday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Mondays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Monday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Tuesdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Tuesday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Wednesdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Wednesday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Thursdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Thursday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Fridays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Friday, name = User.Identity.Name })</td>
-            <td>@Html.ActionLink("View list for Saturdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Saturday, name = User.Identity.Name })</td>
-        </tr>
-    </table>
+<table>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Today", "Index", new { name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Sundays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Sunday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Mondays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Monday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Tuesdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Tuesday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Wednesdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Wednesday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Thursdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Thursday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Fridays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Friday, name = User.Identity.Name })</td>
+    </tr>
+    <tr>
+        <td class="options-table">@Html.ActionLink("View list for Saturdays", "ListByDay", new { dayOfTheWeek = DayOfWeek.Saturday, name = User.Identity.Name })</td>
+    </tr>
+</table>
+    <br /><br />
+    @Html.ActionLink("Profile information", "Details", new { name = User.Identity.Name})
 </div>

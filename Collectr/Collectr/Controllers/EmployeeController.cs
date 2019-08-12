@@ -48,9 +48,9 @@ namespace Collectr.Controllers
         }
 
         // GET: Employee/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string name)
         {
-            var foundEmployee = context.Employees.Where(c => c.ApplicationId == id).Single();
+            var foundEmployee = context.Employees.Where(c => c.EmailAddress == name).Single();
             return View(foundEmployee);
         }
 
